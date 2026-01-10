@@ -1,18 +1,22 @@
-
-import './App.css'
-import Header from './components/header/Header'
+import { Routes, Route, Navigate } from "react-router-dom";
+import Header from "./components/header/Header";
+import UploadFile from "./pages/upload/UploadFile";
+import Records from "./pages/record/Records";
 
 function App() {
-
   return (
     <>
-    <Header/>
-      <div>
-        <h1>Hello World</h1>
-      </div>
-     
+      <Header />
+
+      <main className="pt-20 px-6">
+        <Routes>
+          <Route path="/" element={<Navigate to="/upload" />} />
+          <Route path="/upload" element={<UploadFile />} />
+          <Route path="/records" element={<Records />} />
+        </Routes>
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
