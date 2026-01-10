@@ -14,8 +14,11 @@
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.7",
     "@tailwindcss/vite": "^4.1.18",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.9.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.12.0",
     "tailwindcss": "^4.1.18"
   },
