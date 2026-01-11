@@ -19,8 +19,9 @@ const ExcelUploader = () => {
   const onUploadSuccess = (file) => {
     toast.current.show({ 
       severity: "success", 
-      summary: "Success", 
-      detail: `${file.name} uploaded successfully` 
+      summary: "Upload Successful", 
+      detail: `${file.name} has been uploaded and is ready for processing`,
+      life: 4000
     });
   };
 

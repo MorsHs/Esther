@@ -22,7 +22,7 @@ const UploadArea = ({
     >
       {uploading ? (
         <div className="flex flex-col items-center">
-          <i className="pi pi-spin pi-spinner text-3xl text-blue-600 mb-4" />
+          <i className="pi pi-spin pi-spinner text-3xl text-green-600 mb-4" />
           <p className="text-sm font-medium text-slate-600">Processing file...</p>
         </div>
       ) : (
@@ -33,7 +33,7 @@ const UploadArea = ({
           
           <div className="text-center">
             <p className="text-base font-semibold text-slate-700">
-              Click to upload <span className="text-blue-600">or drag and drop</span>
+              Click to upload <span className="text-green-600">or drag and drop</span>
             </p>
             <p className="text-xs text-slate-400 mt-2">
               Excel files (.xlsx, .xls) up to 10MB

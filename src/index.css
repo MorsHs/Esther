@@ -1,1 +1,72 @@
 @import "tailwindcss";
+
+@layer components {
+  /* Modern Toast Styling with Tailwind */
+  .p-toast {
+    @apply font-sans;
+  }
+
+  .p-toast .p-toast-message {
+    @apply backdrop-blur-xl bg-white/95 rounded-xl shadow-lg border-l-4 min-w-[320px] p-4 mb-3;
+    animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .p-toast .p-toast-message-success {
+    @apply border-l-emerald-500;
+  }
+
+  .p-toast .p-toast-message-success .p-toast-message-icon {
+    @apply text-emerald-500 text-xl;
+  }
+
+  .p-toast .p-toast-message-error {
+    @apply border-l-red-500;
+  }
+
+  .p-toast .p-toast-message-error .p-toast-message-icon {
+    @apply text-red-500 text-xl;
+  }
+
+  .p-toast .p-toast-message-warn {
+    @apply border-l-amber-500;
+  }
+
+  .p-toast .p-toast-message-warn .p-toast-message-icon {
+    @apply text-amber-500 text-xl;
+  }
+
+  .p-toast .p-toast-message-info {
+    @apply border-l-blue-500;
+  }
+
+  .p-toast .p-toast-message-info .p-toast-message-icon {
+    @apply text-blue-500 text-xl;
+  }
+
+  .p-toast .p-toast-message-content {
+    @apply flex items-start gap-3.5 p-0;
+  }
+
+  .p-toast .p-toast-icon-close {
+    @apply w-6 h-6 rounded-md flex items-center justify-center text-slate-500 bg-transparent transition-all hover:bg-slate-100 hover:text-slate-700;
+  }
+
+  .p-toast .p-toast-summary {
+    @apply font-semibold text-[15px] text-slate-900 m-0 leading-snug;
+  }
+
+  .p-toast .p-toast-detail {
+    @apply text-sm text-slate-600 mt-1 m-0 leading-relaxed;
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}

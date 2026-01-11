@@ -4,7 +4,7 @@ const NavLinks = ({ onClick }) => {
   const linkClass = ({ isActive }) =>
     `text-sm font-medium transition ${
       isActive
-        ? "text-red-800 border-b-2 border-red-800 pb-1"
+        ? "text-green-600 border-b-2 border-green-400 pb-1"
         : "text-gray-600 hover:text-gray-900"
     }`;
 
