@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button';
 
-function TableView({Records,onClick}) { //Tanan masulod data sa records na props then butang ra sa table
+function TableView({records,onClick}) { //Tanan masulod data sa records na props then butang ra sa table
     return (
     <TableContainer component={Paper} className="w-3/4 mt-10">
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
