@@ -9,18 +9,33 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useLocation } from 'react-router-dom';
 
 function ChildRecords() {
-  const childProfile = ["Name", "Sex", "Date of Birth", "Barangay", "Current Age"];
-  const childProfileData = ["John Doe", "Male", "2018-05-15", "Barangay 1", "5"];
+  const location = useLocation();
+  const record = location.state?.record;
 
-  const childMonthlyMonitoring = [
-    ["August", "32", "85.2", "N", "N", "N"],
-    ["September", "32", "85.2", "N", "N", "N"],
-    ["October", "32", "85.2", "N", "N", "N"],
-    ["November", "32", "85.2", "N", "N", "N"],
-    ["December", "32", "85.2", "N", "N", "N"],
+  if (!record) {
+    return <div>No record selected</div>;
+  }
+
+  const childProfile = ["Name", "Sex", "Date of Birth", "Barangay", "Current Age"];
+  const childProfileData = [
+    record.child?.name || 'N/A',
+    record.child?.gender || 'N/A',
+    record.child?.dateOfBirth || 'N/A',
+    record.child?.barangayName || 'N/A',
+    record.evaluation?.ageAnchorMonths || 'N/A'
   ];
+
+  const childMonthlyMonitoring = record.monitoringHistory?.sequence?.map(item => [
+    item.month,
+    item.ageInMonths,
+    item.heightCm,
+    item.weightForAge,
+    item.heightForAge,
+    item.weightForLengthHeight
+  ]) || [];
 
   return (
     <div className="flex justify-center py-8 px-4">
@@ -74,7 +89,7 @@ function ChildRecords() {
         </div>
 
         <div className="lg:col-span-1 flex flex-col justify-between">
-          <SummaryCard />
+          <SummaryCard record={record} />
         </div>
       </div>
     </div>
@@ -83,7 +98,10 @@ function ChildRecords() {
 
 export default ChildRecords;
 
-function SummaryCard() {
+function SummaryCard({ record }) {
+  const evaluation = record.evaluation || {};
+  const growthPatternSummary = record.growthPatternSummary || {};
+
   return (
     <Box component="section" className="h-full">
       <Card className="flex flex-col justify-between h-full">
@@ -91,36 +109,33 @@ function SummaryCard() {
         <CardContent className="space-y-3 px-6 py-4 flex flex-col justify-between h-full">
           <div className="space-y-3">
             <div className="text-sm text-gray-700">
-              Current Condition: <span className="text-green-600 font-medium">Normal</span>
+              Current Condition: <span className="text-green-600 font-medium">{evaluation.trendConclusion || 'N/A'}</span>
             </div>
             <div className="text-sm text-gray-700">
-              Trend Conclusion: <span className="font-medium">Persist</span>
+              Trend Conclusion: <span className="font-medium">{evaluation.trendConclusion || 'N/A'}</span>
             </div>
             <div className="text-sm text-gray-700">
-              Evaluation Period: <span className="font-medium">Last 5 months</span>
+              Evaluation Period: <span className="font-medium">{evaluation.evaluationWindowMonths ? `Last ${evaluation.evaluationWindowMonths} months` : 'N/A'}</span>
             </div>
             <div className="text-sm text-gray-700">
-              Age Reference: <span className="font-medium">36 months</span>
+              Age Reference: <span className="font-medium">{evaluation.ageAnchorMonths ? `${evaluation.ageAnchorMonths} months` : 'N/A'}</span>
             </div>
             <div className="text-sm text-green-600">
-              Estimated Concern: No concern expected within next 6 months
+              Estimated Concern: {evaluation.estimatedConditionTimeRange || 'N/A'}
             </div>
 
             <hr className="my-2" />
 
             <p className="text-sm text-gray-600 leading-relaxed">
-              The child is currently in normal nutritional condition. Based on growth
-              patterns observed over the past five months and interpreted at the
-              child's current age of 36 months, measurements remain within the
-              normal range with no indication of nutritional deterioration.
+              {evaluation.summary || 'No summary available.'}
             </p>
 
             <hr className="my-2" />
 
             <div className="text-xs text-gray-500 space-y-1">
-              <div>WFA = Weight-for-Age</div>
-              <div>HFA = Height-for-Age</div>
-              <div>WFLH = Weight-for-Length/Height</div>
+              <div>WFA = Weight-for-Age: {growthPatternSummary.weightForAge?.trendPattern || 'N/A'}</div>
+              <div>HFA = Height-for-Age: {growthPatternSummary.heightForAge?.trendPattern || 'N/A'}</div>
+              <div>WFLH = Weight-for-Length/Height: {growthPatternSummary.weightForLengthHeight?.trendPattern || 'N/A'}</div>
               <div>N = Normal</div>
             </div>
           </div>

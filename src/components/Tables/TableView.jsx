@@ -19,11 +19,13 @@ function TableView({records,onClick}) { //Tanan masulod data sa records na props
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow>
-                            <TableCell>04/18/2021</TableCell>
-                            <TableCell>John Doe</TableCell>
-                            <TableCell><Button variant="contained" color="primary" onClick={onClick}>View</Button></TableCell>
-                        </TableRow>
+                        {records.map((record, index) => (
+                            <TableRow key={record.child.id || index}>
+                                <TableCell>{record.evaluation?.dateOfUpload || 'N/A'}</TableCell>
+                                <TableCell>{record.child?.name || 'N/A'}</TableCell>
+                                <TableCell><Button variant="contained" color="primary" onClick={() => onClick(record)}>View</Button></TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>)
