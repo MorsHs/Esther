@@ -16,12 +16,17 @@ export const useEvaluationStorage = create(
             save(record) {
                 if (!record?.child?.id) return
 
-                set(state => ({
-                    records: {
-                        ...state.records,
-                        [record.child.id]: record
+                set(state => {
+                    const id = record.child.id
+                    const prev = state.records[id] || []
+
+                    return {
+                        records: {
+                            ...state.records,
+                            [id]: [...prev, record]
+                        }
                     }
-                }))
+                })
             },
 
             remove(id) {
