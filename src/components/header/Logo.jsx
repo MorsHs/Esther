@@ -7,7 +7,7 @@
         className="h-10 w-10"
       />
       <span className="text-lg font-semibold text-gray-900">
-        Esther
+        Nutri-Foresight
       </span>
     </div>
   );
